@@ -21,5 +21,3 @@ const initMemory = () => {
     memory.appendChild(row);
   }
 }
-
-initMemory()
