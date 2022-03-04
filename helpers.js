@@ -20,9 +20,16 @@ const initMemory = (memory) => {
   }
 }
 
+const resetMemory = () => {
+  for (let i=0; i<256; i++) {
+    document.getElementById(`memory_${hex(i)}`).innerText = '00';
+  }
+}
+
 let queue = [];
 
 const reset = () => {
+  resetMemory()
   queue = [];
   let instructions = document.getElementById('input').value;
   for (let instr of instructions.split('\n')) {
