@@ -22,7 +22,7 @@ const initMemory = (memory) => {
 
 let queue = [];
 
-const reload = () => {
+const reset = () => {
   queue = [];
   let instructions = document.getElementById('input').value;
   for (let instr of instructions.split('\n')) {
@@ -36,8 +36,11 @@ const next = () => {
 }
 
 const addressing = (addr) => {
-  if (addr[0] === '#') {
-    return addr.slice(2);
+  if (addr[0] === '#' && addr[1] === '$') {
+    return [null, addr.slice(2)];
+  } else if (addr[0] === '$') {
+    let location = 'memory_' + addr.slice(1);
+    return [location, document.getElementById(location).innerText];
   }
 }
 
@@ -51,11 +54,18 @@ const handleInstruction = (instruction) => {
 }
 
 const opcodes = {
-  'LDA': 'LoaDAccumulator'
+  'LDA': 'LoaDAccumulator',
+  'STA': 'SToreAccumulator'
 };
 
 const LoaDAccumulator = (args) => {
-  let value = addressing(args[0]);
-  A = value;
-  console.log(`A = ${value}`);
+  let addr = addressing(args[0]);
+  A = addr[1];
+  console.log(`A = ${A}`);
+}
+
+const SToreAccumulator = (args) => {
+  let addr = addressing(args[0]);
+  document.getElementById(addr[0]).innerText = A;
+  console.log(`${A} stored at ${addr[0]}`)
 }
