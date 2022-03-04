@@ -35,7 +35,27 @@ const next = () => {
   handleInstruction(instruction);
 }
 
+const addressing = (addr) => {
+  if (addr[0] === '#') {
+    return addr.slice(2);
+  }
+}
+
 const handleInstruction = (instruction) => {
   let args = instruction.split(' ');
-  console.log(args);
+  let opcode = args.shift();
+  if (opcodes[opcode] != -1) {
+    console.log(opcodes[opcode])
+    eval(opcodes[opcode])(args);
+  }
+}
+
+const opcodes = {
+  'LDA': 'LoaDAccumulator'
+};
+
+const LoaDAccumulator = (args) => {
+  let value = addressing(args[0]);
+  A = value;
+  console.log(`A = ${value}`);
 }
