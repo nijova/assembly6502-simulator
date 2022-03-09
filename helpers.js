@@ -62,7 +62,11 @@ const handleInstruction = (instruction) => {
 
 const opcodes = {
   'LDA': 'LoaDAccumulator',
-  'STA': 'SToreAccumulator'
+  'LDX': 'LoaDXregister',
+  'LDY': 'LoaDYregister',
+  'STA': 'SToreAccumulator',
+  'STX': 'SToreXregister',
+  'STY': 'SToreYregister',
 };
 
 const LoaDAccumulator = (args) => {
@@ -71,8 +75,32 @@ const LoaDAccumulator = (args) => {
   console.log(`A = ${A}`);
 }
 
+const LoaDXregister = (args) => {
+  let addr = addressing(args[0]);
+  X = addr[1];
+  console.log(`X = ${X}`);
+}
+
+const LoaDYregister = (args) => {
+  let addr = addressing(args[0]);
+  Y = addr[1];
+  console.log(`Y = ${Y}`);
+}
+
 const SToreAccumulator = (args) => {
   let addr = addressing(args[0]);
   document.getElementById(addr[0]).innerText = A;
   console.log(`${A} stored at ${addr[0]}`)
+}
+
+const SToreXregister = (args) => {
+  let addr = addressing(args[0]);
+  document.getElementById(addr[0]).innerText = X;
+  console.log(`${X} stored at ${addr[0]}`)
+}
+
+const SToreYregister = (args) => {
+  let addr = addressing(args[0]);
+  document.getElementById(addr[0]).innerText = Y;
+  console.log(`${Y} stored at ${addr[0]}`)
 }
