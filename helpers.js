@@ -67,6 +67,10 @@ const opcodes = {
   'STA': 'SToreAccumulator',
   'STX': 'SToreXregister',
   'STY': 'SToreYregister',
+  'TAX': 'TransferAtoX',
+  'TAY': 'TransferAtoY',
+  'TXA': 'TransferXtoA',
+  'TYA': 'TransferYtoA',
 };
 
 const LoaDAccumulator = (args) => {
@@ -103,4 +107,24 @@ const SToreYregister = (args) => {
   let addr = addressing(args[0]);
   document.getElementById(addr[0]).innerText = Y;
   console.log(`${Y} stored at ${addr[0]}`)
+}
+
+const TransferAtoX = (_) => {
+  X = A;
+  console.log(`X = ${X}`);
+}
+
+const TransferAtoY = (_) => {
+  Y = A;
+  console.log(`Y = ${Y}`);
+}
+
+const TransferXtoA = (_) => {
+  A = X;
+  console.log(`A = ${A}`);
+}
+
+const TransferYtoA = (_) => {
+  A = Y;
+  console.log(`A = ${A}`);
 }
