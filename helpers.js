@@ -61,6 +61,8 @@ const handleInstruction = (instruction) => {
 }
 
 const opcodes = {
+  'ADC': 'ADdwithCarry',
+  'BRK': 'BReaK',
   'DEX': 'DEcrementX',
   'DEY': 'DEcrementY',
   'INX': 'INcrementX',
@@ -76,6 +78,20 @@ const opcodes = {
   'TXA': 'TransferXtoA',
   'TYA': 'TransferYtoA',
 };
+
+const ADdwithCarry = (args) => {
+  let addr = addressing(args[0]);
+  console.log(addr[1])
+  let val10 = parseInt(addr[1], 16);
+  A = parseInt(A, 16) + val10;
+  if (A > 255) { A = A % 256; }
+  A = hex(A);
+  console.log(`A = ${A}`);
+}
+
+const BReaK = (_) => {
+  console.log('BREAK');
+}
 
 const DEcrementX = (_) => {
   let x10 = parseInt(X, 16);
