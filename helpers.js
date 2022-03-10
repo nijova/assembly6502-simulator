@@ -61,6 +61,10 @@ const handleInstruction = (instruction) => {
 }
 
 const opcodes = {
+  'DEX': 'DEcrementX',
+  'DEY': 'DEcrementY',
+  'INX': 'INcrementX',
+  'INY': 'INcrementY',
   'LDA': 'LoaDAccumulator',
   'LDX': 'LoaDXregister',
   'LDY': 'LoaDYregister',
@@ -72,6 +76,38 @@ const opcodes = {
   'TXA': 'TransferXtoA',
   'TYA': 'TransferYtoA',
 };
+
+const DEcrementX = (_) => {
+  let x10 = parseInt(X, 16);
+  X = x10 - 1;
+  if (X === -1) { X = 255; }
+  X = hex(X);
+  console.log(`X = ${X}`);
+}
+
+const DEcrementY = (_) => {
+  let y10 = parseInt(Y, 16);
+  Y = y10 - 1;
+  if (Y === -1) { Y = 255; }
+  Y = hex(Y);
+  console.log(`Y = ${Y}`);
+}
+
+const INcrementX = (_) => {
+  let x10 = parseInt(X, 16);
+  X = x10 + 1;
+  if (X === 256) { X = 0; }
+  X = hex(X);
+  console.log(`X = ${X}`);
+}
+
+const INcrementY = (_) => {
+  let y10 = parseInt(Y, 16);
+  Y = y10 + 1;
+  if (Y === 256) { Y = 0; }
+  Y = hex(Y);
+  console.log(`Y = ${Y}`);
+}
 
 const LoaDAccumulator = (args) => {
   let addr = addressing(args[0]);
