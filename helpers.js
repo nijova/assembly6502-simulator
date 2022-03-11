@@ -63,6 +63,9 @@ const handleInstruction = (instruction) => {
 const opcodes = {
   'ADC': 'ADdwithCarry',
   'BRK': 'BReaK',
+  'CMP': 'CoMPare accumulator',
+  'CPX': 'ComPareXregister',
+  'CPY': 'ComPareYregister',
   'DEX': 'DEcrementX',
   'DEY': 'DEcrementY',
   'INX': 'INcrementX',
@@ -81,7 +84,6 @@ const opcodes = {
 
 const ADdwithCarry = (args) => {
   let addr = addressing(args[0]);
-  console.log(addr[1])
   let val10 = parseInt(addr[1], 16);
   A = parseInt(A, 16) + val10;
   if (A > 255) { A = A % 256; }
@@ -91,6 +93,10 @@ const ADdwithCarry = (args) => {
 
 const BReaK = (_) => {
   console.log('BREAK');
+}
+
+const CMP = (args) => {
+
 }
 
 const DEcrementX = (_) => {
